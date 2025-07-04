@@ -1,27 +1,52 @@
-import { NgClass } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CommonModule, NgClass } from '@angular/common';
+import { Component, Inject, NgModule, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '../../shared/Material';
+import { taskForm } from '../../model/task-model/task-model.model';
+
 @Component({
   selector: 'app-task-assign-page',
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule, NgClass, CommonModule],
   templateUrl: './task-assign-page.html',
-  styleUrl: './task-assign-page.scss'
+  styleUrl: './task-assign-page.scss',
 })
-export class TaskAssignPage {
-    taskForm: FormGroup;
+export class TaskAssignPage implements OnInit {
+  taskForm: FormGroup;
+  assigneeOptions: string[] = ['Ritesh', 'Ananya', 'Rahul', 'Neha', 'Vikram'];
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    @Inject(MatDialogRef) public dialogRef: MatDialogRef<TaskAssignPage>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     this.taskForm = this.fb.group({
       taskName: ['', Validators.required],
       assigneeName: ['', [Validators.required, Validators.maxLength(40)]],
       repeatCount: [1],
-      isRecurring: [false, [Validators.requiredTrue]],
+      isRecurring: [false],
     });
+  }
+  ngOnInit(): void {
+    this.taskForm.reset({ repeatCount: 1, isRecurring: false });
+  }
+
+  getNextId(): number {
+    const current = Number(localStorage.getItem('taskCounter') || '0');
+    const next = current + 1;
+    localStorage.setItem('taskCounter', String(next));
+    return next;
   }
 
   isNameInvalid(): boolean {
     const control = this.taskForm.get('assigneeName');
-    return control?.touched && control?.invalid && control?.errors?.['required'];
+    return (
+      control?.touched && control?.invalid && control?.errors?.['required']
+    );
   }
 
   increase(): void {
@@ -38,18 +63,24 @@ export class TaskAssignPage {
     }
   }
 
+  onCloseClick(): void {
+    this.dialogRef.close('dialog close successful');
+  }
+
   onSubmit(): void {
     if (this.taskForm.valid) {
+      const formData = { ...this.taskForm.value, id: this.getNextId(), 
+      };
+      console.log(' Form Submitted:', formData);
 
-      const formData = this.taskForm.value;
-   
-    console.log(' Form Submitted:', formData);
-    localStorage.setItem('assignedTask', JSON.stringify(formData));
-      this.taskForm.reset({ repeatCount: 1, isRecurring: false });
-      
+      const existingTask: taskForm[] = JSON.parse(
+        localStorage.getItem('assignedTasks') || '[]'
+      );
+      existingTask.push(formData);
+      localStorage.setItem('assignedTasks', JSON.stringify(existingTask));
+      this.onCloseClick();
     } else {
       this.taskForm.markAllAsTouched();
     }
   }
 }
-

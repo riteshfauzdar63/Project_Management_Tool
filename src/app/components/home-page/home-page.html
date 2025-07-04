@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Task Assignment Tool</a>
+        <a class="navbar-brand text-success ms-5" href="#">Project Assignment Tool</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -13,4 +13,45 @@
         </div>
     </div>
 </nav>
-<button [routerLink]="['/TaskAssignPage']">go to task assign page</button>
+
+<section>
+    <div class="container my-3">
+        <div class="d-flex justify-content-between">
+            <h4 class="text-success">Hello User</h4>
+            <button class="btn btn-outline-success rounded" (click)="openDialog()">Create Task</button>
+        </div>
+        <h3 class="text-primary text-center mt-5">All Assigned Tasks</h3>
+
+        <table class="table table-striped mt-3" *ngIf="taskList.length > 0">
+            <thead class="table-success">
+                <tr>
+                    <th>Id</th>
+                    <th>Task</th>
+                    <th class="text-center">Assignee</th>
+                    <th class="text-center">Task Frequency</th>
+                    <th class="text-center">Monthly Recurring</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let task of taskList; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ task.taskName}}</td>
+                    <td class="text-center">{{ task.assigneeName }}</td>
+                    <td class="text-center">{{ task.repeatCount }}</td>
+                    <td class="text-center">{{ task.isRecurring? 'Yes' : 'No' }}</td>
+                    <td class="text-center">
+                        <button mat-raised-button color="primary" class="me-2" (click)="editTask(task.id)">Edit</button>
+                        <button mat-raised-button color="accent" >Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div *ngIf="taskList.length === 0" class="text-muted">
+            No tasks found.
+        </div>
+
+    </div>
+
+</section>
