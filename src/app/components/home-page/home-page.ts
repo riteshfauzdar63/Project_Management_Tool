@@ -36,16 +36,7 @@ export class HomePage implements OnInit{
     localStorage.removeItem('assignmentTask');
   }
     
-//  editTask(id: number): void {
-//   const tasks = JSON.parse(localStorage.getItem('assignedTasks') || '[]');
-//   const task = tasks.find((t: any) => t.id === id);
 
-//   if (task) {
-//     this.dialogRef.open(TaskAssignPage, {
-//       width: '500px',
-//       data: task  // ✅ Pass task data to dialog
-//     });
-//   }
-// }
+
 }
 

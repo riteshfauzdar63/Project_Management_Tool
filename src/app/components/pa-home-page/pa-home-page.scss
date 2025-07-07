@@ -1,0 +1,133 @@
+// Theme colors
+$primary-color: #0d6efd;
+$secondary-color: #6c757d;
+$light-bg: #f8f9fa;
+$dark-bg: #212529;
+
+// Fonts
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+// Hero Section
+.hero-section {
+  background: linear-gradient(to bottom right, rgba(13, 110, 253, 0.9), rgba(0, 0, 0, 0.7)),
+              url('/assets/img/project-banner.jpg') center/cover no-repeat;
+  min-height: 90vh;
+  padding: 5rem 2rem;
+  text-align: center;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    padding: 0.75rem 2rem;
+    font-size: 1.1rem;
+  }
+}
+
+// Features Section
+.features-section {
+  padding: 3rem 0;
+
+  h2 {
+    font-weight: 600;
+    color: $primary-color;
+  }
+
+  p.text-muted {
+    color: $secondary-color;
+    font-size: 1.1rem;
+  }
+
+  .card {
+    border: none;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: white;
+
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow:
+        0 4px 12px rgba(13, 110, 253, 0.2),  // soft blue outer glow
+        0 2px 20px rgba(0, 0, 0, 0.1) !important;       // subtle black depth shadow
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    i,
+    img {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+
+// CTA Section
+.cta-section {
+  background-color: $primary-color;
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+
+  h2 {
+    font-weight: 600;
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    background: white;
+    color: $primary-color;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+
+    &:hover {
+      background-color: darken(white, 5%);
+    }
+  }
+}
+
+// Footer
+footer {
+  background-color: $dark-bg;
+  color: #ccc;
+  font-size: 0.9rem;
+  padding: 1.5rem 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.2rem;
+  }
+
+  .features-section .card {
+    text-align: center;
+  }
+}

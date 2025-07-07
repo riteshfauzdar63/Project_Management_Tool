@@ -1,11 +1,6 @@
 import { CommonModule, NgClass } from '@angular/common';
 import { Component, Inject, NgModule, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '../../shared/Material';
 import { taskForm } from '../../model/task-model/task-model.model';
 
@@ -13,16 +8,15 @@ import { taskForm } from '../../model/task-model/task-model.model';
   selector: 'app-task-assign-page',
   imports: [ReactiveFormsModule, NgClass, CommonModule],
   templateUrl: './task-assign-page.html',
-  styleUrl: './task-assign-page.scss',
+  styleUrl: './task-assign-page.scss'
 })
-export class TaskAssignPage implements OnInit {
-  taskForm: FormGroup;
-  assigneeOptions: string[] = ['Ritesh', 'Ananya', 'Rahul', 'Neha', 'Vikram'];
-
-  constructor(
-    private fb: FormBuilder,
-    @Inject(MatDialogRef) public dialogRef: MatDialogRef<TaskAssignPage>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+export class TaskAssignPage implements OnInit{
+    taskForm: FormGroup;
+    assigneeOptions: string[] = ['Ritesh', 'Ananya', 'Rahul', 'Neha', 'Vikram'];
+    
+  constructor(private fb: FormBuilder,
+    @Inject(MatDialogRef) public dialogRef : MatDialogRef<TaskAssignPage>,
+              @Inject(MAT_DIALOG_DATA) public data : any,
   ) {
     this.taskForm = this.fb.group({
       taskName: ['', Validators.required],
@@ -34,19 +28,11 @@ export class TaskAssignPage implements OnInit {
   ngOnInit(): void {
     this.taskForm.reset({ repeatCount: 1, isRecurring: false });
   }
-
-  getNextId(): number {
-    const current = Number(localStorage.getItem('taskCounter') || '0');
-    const next = current + 1;
-    localStorage.setItem('taskCounter', String(next));
-    return next;
-  }
+  
 
   isNameInvalid(): boolean {
     const control = this.taskForm.get('assigneeName');
-    return (
-      control?.touched && control?.invalid && control?.errors?.['required']
-    );
+    return control?.touched && control?.invalid && control?.errors?.['required'];
   }
 
   increase(): void {
@@ -64,23 +50,26 @@ export class TaskAssignPage implements OnInit {
   }
 
   onCloseClick(): void {
+    // You can pass data back to the component that opened the dialog
     this.dialogRef.close('dialog close successful');
   }
 
+
   onSubmit(): void {
     if (this.taskForm.valid) {
-      const formData = { ...this.taskForm.value, id: this.getNextId(), 
-      };
-      console.log(' Form Submitted:', formData);
 
-      const existingTask: taskForm[] = JSON.parse(
-        localStorage.getItem('assignedTasks') || '[]'
-      );
-      existingTask.push(formData);
-      localStorage.setItem('assignedTasks', JSON.stringify(existingTask));
-      this.onCloseClick();
-    } else {
+      const formData: taskForm = this.taskForm.value;
+    console.log(' Form Submitted:', formData);
+
+    const existingTask: taskForm[] = JSON.parse(localStorage.getItem('assignedTasks') || "[]");
+    existingTask.push(formData);
+    localStorage.setItem('assignedTasks', JSON.stringify(existingTask));
+    this.onCloseClick();
+      
+    } 
+    else {
       this.taskForm.markAllAsTouched();
     }
   }
 }
+
