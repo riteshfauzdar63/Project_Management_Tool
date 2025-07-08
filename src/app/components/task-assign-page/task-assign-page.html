@@ -3,31 +3,39 @@
         <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="p-4 shadow rounded bg-light">
             <h3 class="text-success mb-4">Assign A Task</h3>
 
-    
-            <div class="mb-3">
+            <div class="row">
+            <div class="col-md-7 mb-3">
                 <label class="form-label">Task Name</label>
                 <input type="text" formControlName="taskName" class="form-control" placeholder="Enter task name" 
                 [ngClass]="{'is-invalid':taskForm.get('taskName')?.touched && taskForm.get('taskName')?.invalid}">
             </div>
 
-    
-            <div class="mb-3">
-                <label for="assigneeName" class="form-label">Assignee Name</label>
-                <select formControlName="assigneeName" id="assigneeName" class="form-select" 
-                [ngClass]="{'is-invalid':taskForm.get('assigneeName')?.touched && taskForm.get('assigneeName')?.invalid}">
+            <div class="col-md-5 mb-3">
+                <label for="assignedTo" class="form-label">Employee Name</label>
+                <select formControlName="assignedTo" id="assignedTo" class="form-select" 
+                [ngClass]="{'is-invalid':taskForm.get('assignedTo')?.touched && taskForm.get('assignedTo')?.invalid}">
                     <option value="" disabled>Select assignee</option>
-                    <option *ngFor="let name of assigneeOptions" [value]="name">{{ name }}</option>
+                    <option *ngFor="let emp of assigneeOptions" [ngValue]="emp.employeeId">{{ emp.fullName }}</option>
                 </select>
                 <div class="invalid-feedback">Please select a name.</div>
             </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Task Description</label>
+                <textarea type="text" formControlName="description" class="form-control" placeholder="Enter task details"
+                rows="2"></textarea>
+            </div>
+    
+            
 
 
          
             <div class="mb-3">
-                <label class="form-label">Repeat in Month</label>
+                <label class="form-label">Frequency per Month</label>
                 <div class="input-group">
                     <button type="button" class="btn btn-outline-secondary" (click)="decrease()">−</button>
-                    <input type="number" formControlName="repeatCount" class="form-control text-center" readonly />
+                    <input type="number" formControlName="frequencyPerMonth" class="form-control text-center" id="frequencyPerMonth" readonly />
                     <button type="button" class="btn btn-outline-secondary" (click)="increase()">+</button>
                 </div>
                 <div class="form-text">Repeat 1 to 4 times a month</div>

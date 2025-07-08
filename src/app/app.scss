@@ -1,12 +1,22 @@
-.d-flex {
-  display: flex;
+app-header {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+  height: 63px;
 }
 
 app-side-bar {
-  flex-shrink: 0;
+  position: fixed;
+  top: 63px;
+  left: 0;
+  width: 275px; /* fixed width for sidebar */
+  height: calc(100vh - 63px);
+  z-index: 100;
 }
 
 .router-container {
-  flex-grow: 1;
-  padding: 0 5px;
+  margin-left: 275px; /* same as sidebar width */
+  padding: 0px 10px;
+overflow-x: hidden;
+  padding-top: 70px; /* to clear header */
 }
