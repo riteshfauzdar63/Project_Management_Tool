@@ -11,10 +11,19 @@
   <app-header></app-header>
   <router-outlet></router-outlet>
 </div> -->
-<app-header></app-header>
+<!-- <app-header></app-header>
 
 <app-side-bar></app-side-bar>
 
 <div class="router-container">
   <router-outlet></router-outlet>
+</div> -->
+<app-header></app-header>
+
+<div class="main-layout" [class.sidebar-collapsed]="isSidebarCollapsed">
+  <app-side-bar (sidebarToggle)="onSidebarToggle($event)"></app-side-bar>
+
+  <div class="router-container">
+    <router-outlet></router-outlet>
+  </div>
 </div>

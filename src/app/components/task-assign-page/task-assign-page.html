@@ -1,7 +1,7 @@
 <section>
     <div class="container form-container p-0">
         <form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="p-4 shadow rounded bg-light">
-            <h3 class="text-success mb-4">Assign A Task</h3>
+            <h3 class="text-primary mb-4">Assign A Task</h3>
             <button mat-icon-button mat-dialog-close aria-label="Close dialog" class="close-button" (click)="onCloseClick()">
             <mat-icon>close</mat-icon>
             </button>
@@ -53,7 +53,7 @@
            
 
             <!-- Submit -->
-            <button type="submit" class="btn btn-success w-100">{{ isEditMode ? 'Update Task' : 'Assign Task' }}</button>
+            <button type="submit" class="btn btn-primary w-100">{{ isEditMode ? 'Update Task' : 'Assign Task' }}</button>
         </form>
     </div>
 

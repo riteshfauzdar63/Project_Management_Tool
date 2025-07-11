@@ -1,0 +1,116 @@
+.task-details-card {
+  max-width: 750px;
+  margin: 3rem auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  border: 1px solid #dee2e6;
+
+  .card-header {
+    background: linear-gradient(to right, #0d6efd, #5f9df7);
+    color: #fff;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h5 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+
+    .badge {
+      font-size: 0.9rem;
+      padding: 0.5em 1em;
+      border-radius: 30px;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .bg-success {
+      background-color: #28a745 !important;
+    }
+
+    .bg-warning {
+      background-color: #ffc107 !important;
+      color: #212529 !important;
+    }
+
+    .bg-danger {
+      background-color: #dc3545 !important;
+    }
+  }
+
+  .card-body {
+    padding: 2rem;
+
+    .detail-item {
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: baseline;
+
+      strong {
+        min-width: 160px;
+        font-size: 1rem;
+        color: #495057;
+        font-weight: 600;
+      }
+
+      span, p {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      p {
+        line-height: 1.5;
+      }
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #ddd;
+      margin: 1.5rem 0;
+    }
+  }
+
+  .card-footer {
+    background: #f8f9fa;
+    padding: 1.25rem 2rem;
+    text-align: right;
+    border-top: 1px solid #dee2e6;
+
+    button {
+      min-width: 120px;
+      font-weight: 500;
+      border-radius: 8px;
+      padding: 10px 20px;
+      margin-left: 10px;
+      transition: all 0.3s ease;
+
+      &.btn-primary {
+        background: linear-gradient(to right, #0d6efd, #5f9df7);
+        border: none;
+
+        &:hover {
+          background: #084cdf;
+        }
+      }
+
+      &.btn-secondary {
+        background-color: #6c757d;
+        border: none;
+
+        &:hover {
+          background-color: #5a6268;
+        }
+      }
+    }
+  }
+}

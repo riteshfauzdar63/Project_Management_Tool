@@ -1,34 +1,64 @@
 <form [formGroup]="completionForm" (ngSubmit)="onSubmit()" class="completion-form">
-  <mat-card>
-    <mat-card-title class="form-title">Task Completion</mat-card-title>
-    <mat-card-content>
-      <div class="form-grid">
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Task ID</mat-label>
-          <input matInput formControlName="taskId" readonly />
-        </mat-form-field>
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+  <h5 class="mb-0">Task Completion</h5>
+  <div class="d-flex align-items-center">
+    <span class="status-circle me-2"
+          [ngClass]="{
+            'status-active': completionForm.get('taskStatus')?.value === 'Active',
+            'status-incomplete': completionForm.get('taskStatus')?.value === 'Incompleted',
+          }">
+    </span>
+    <span class="text-capitalize">
+      {{ completionForm.get('taskStatus')?.value }}
+    </span>
+  </div>
+</div>
 
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Task Name</mat-label>
-          <input matInput formControlName="taskName" readonly />
-        </mat-form-field>
 
-        <mat-form-field appearance="outline" class="form-field">
-          <mat-label>Assigned To</mat-label>
-          <input matInput formControlName="assignedToName" readonly />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="form-field full-width">
-          <mat-label>Feedback</mat-label>
-          <textarea matInput formControlName="feedback" rows="4" placeholder="Enter your remarks..." required></textarea>
-        </mat-form-field>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <label class="form-label">Task ID</label>
+          <input type="text" class="form-control" formControlName="taskId" readonly />
+        </div>
+        <div class="col-md-8">
+          <label class="form-label">Task Name</label>
+          <input type="text" class="form-control" formControlName="taskName" readonly />
+        </div>
       </div>
-    </mat-card-content>
 
-    <mat-card-actions align="end" class="form-actions">
-      <button mat-raised-button color="primary" type="submit" [disabled]="completionForm.invalid">
+      <div class="mb-3">
+        <label class="form-label">Task Description</label>
+        <input type="text" class="form-control" formControlName="taskDescription" readonly />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Assigned To</label>
+        <input type="text" class="form-control" formControlName="assignedToName" readonly />
+      </div>
+
+      <div class="row mb-3" *ngIf="completionForm.get('isRecurring')?.value === true">
+        <div class="col-md-5">
+          <label class="form-label">Is Recurring</label>
+          <input type="text" class="form-control" formControlName="isRecurring" readonly />
+        </div>
+        <div class="col-md-7">
+          <label class="form-label">Completion Status</label>
+          <input type="text" class="form-control" formControlName="completionStatus" readonly />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Feedback</label>
+        <textarea class="form-control" formControlName="feedback" rows="4" placeholder="Enter your remarks..." required></textarea>
+      </div>
+    </div>
+
+    <div class="card-footer text-end">
+      <button type="submit" class="btn btn-primary" [disabled]="completionForm.invalid">
         Complete Task
       </button>
-    </mat-card-actions>
-  </mat-card>
+    </div>
+  </div>
 </form>

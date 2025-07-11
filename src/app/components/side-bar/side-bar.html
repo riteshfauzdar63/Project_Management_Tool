@@ -1,36 +1,39 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar-menu">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span class="fs-4">Sidebar</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a [routerLink]="'home-page'" routerLinkActive="active" class="nav-link text-white active" aria-current="page">
-          <svg class="bi me-2" width="16" height="16"></svg>
-          Home
-        </a>
-      </li>
-      <li>
-        <a [routerLink]="'/taskAssignPage'" routerLinkActive="active" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"></svg>
-          Task Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"></svg>
-          Task Summary
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"></svg>
-          Task Histroy
-        </a>
-      </li>
-      
-    </ul>
-    <hr>
-   
+<div class="sidebar-menu bg-dark text-white d-flex flex-column p-3" [class.collapsed]="isCollapsed">
+  <!-- Sidebar toggle -->
+  <div class="sidebar-header d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none" (click)="toggleSidebar()">
+    <i class="bi bi-kanban-fill me-2 fs-4"></i>
+    <span *ngIf="!isCollapsed" class="fs-4">Project Tool</span>
   </div>
+
+  <hr />
+
+  <!-- Navigation Links -->
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a [routerLink]="'/home-page'" routerLinkActive="active" class="nav-link text-white">
+        <i class="bi bi-house-door-fill me-2"></i>
+        <span *ngIf="!isCollapsed">Home</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="'/taskAssignPage'" routerLinkActive="active" class="nav-link text-white">
+        <i class="bi bi-check2-square me-2"></i>
+        <span *ngIf="!isCollapsed">Task Dashboard</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="'/taskSummaryPage'" routerLinkActive="active" class="nav-link text-white">
+        <i class="bi bi-clipboard-data-fill me-2"></i>
+        <span *ngIf="!isCollapsed">Task Summary</span>
+      </a>
+    </li>
+    <li>
+      <a [routerLink]="'/taskHistoryPage'" routerLinkActive="active" class="nav-link text-white">
+        <i class="bi bi-clock-history me-2"></i>
+        <span *ngIf="!isCollapsed">Task History</span>
+      </a>
+    </li>
+  </ul>
+
+  <hr />
+</div>

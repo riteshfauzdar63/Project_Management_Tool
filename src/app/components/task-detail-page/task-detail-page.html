@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="card task-details-card mx-auto">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0">Task Details</h5>
+      <span class="badge"
+            [ngClass]="{
+              'bg-success': task.taskStatus === 'Completed',
+              'bg-warning text-dark': task.taskStatus === 'Active',
+              'bg-danger': task.taskStatus === 'Incomplete'
+            }">
+        {{ task.taskStatus }}
+      </span>
+    </div>
+
+    <div class="card-body">
+      <div class="mb-3">
+        <strong>Task ID:</strong> {{ task.taskId }}
+      </div>
+      <div class="mb-3">
+        <strong>Task Name:</strong> {{ task.taskName }}
+      </div>
+
+      <div class="mb-3">
+        <strong>Created By:</strong> {{ task.createdByName }}
+      </div>
+
+      <div class="mb-3">
+        <strong>Task Description:</strong> {{ task.description }}
+      </div>
+      
+
+      <div class="mb-3">
+        <strong>Assigned To:</strong> {{ task.assignedToEmployeeName }}
+      </div>
+
+      <div *ngIf="task.isRecurring" class="mb-3">
+        <strong>Recurring:</strong> Yes ({{ task.frequencyPerMonth }} times/month)
+      </div>
+
+      <div class="mb-3">
+        <strong> Remarks:</strong>
+        {{ task.remarks }}
+      </div>
+    </div>
+
+  </div>
+</div>
+

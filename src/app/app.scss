@@ -1,22 +1,42 @@
+/* Layout wrapper */
+.main-layout {
+  display: flex;
+
+  .router-container {
+    flex-grow: 1;
+    padding: 65px 10px 10px 10px;
+    margin-left: 235px;
+    transition: margin-left 0.3s ease;
+    overflow-x: hidden;
+  }
+
+  &.sidebar-collapsed {
+    .router-container {
+      margin-left: 80px;
+    }
+  }
+}
+
 app-header {
   position: fixed;
   width: 100%;
   z-index: 100;
   height: 63px;
+  top: 0;
+  left: 0;
 }
 
+/* Sidebar styling */
 app-side-bar {
   position: fixed;
   top: 63px;
   left: 0;
-  width: 235px; /* fixed width for sidebar */
   height: calc(100vh - 63px);
+  width: 235px;
   z-index: 100;
-}
+  transition: width 0.3s ease;
 
-.router-container {
-  margin-left: 235px; /* same as sidebar width */
-  padding: 0px 10px;
-overflow-x: hidden;
-  padding-top: 70px; /* to clear header */
+  &.collapsed {
+    width: 80px;
+  }
 }

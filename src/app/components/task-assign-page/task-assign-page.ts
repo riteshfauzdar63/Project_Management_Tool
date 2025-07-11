@@ -113,12 +113,11 @@ export class TaskAssignPage implements OnInit {
     if (this.taskForm.valid) {
       this.taskForm.patchValue({
         createdBy: 1,
-
         createdDate: new Date().toISOString().split('T')[0],
         startDate: new Date().toISOString().split('T')[0],
       });
+
       const formValue = this.taskForm.getRawValue();
-      // const formData = this.taskForm.value;
       const formData = new FormData();
       if (formValue.taskId != null) {
         formData.set('TaskId', this.taskForm.get('taskId')?.value);

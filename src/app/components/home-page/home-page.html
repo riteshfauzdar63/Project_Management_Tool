@@ -1,22 +1,22 @@
 <section>
     <div class="container my-3">
         <div class="d-flex justify-content-between">
-            <h4 class="text-dark">Hello User</h4>
-            <button class="btn btn-outline-success rounded" (click)="openDialog()">Create Task</button>
-
-
+            <h4 class="text-dark">Hello User 👋</h4>
+            <button class="btn btn-primary rounded" (click)="openDialog()">Create Task</button>
         </div>
-        <h3 class="text-primary text-center mt-5">All Assigned Tasks</h3>
+        <h3 class="table-heading text-primary text-center mt-0">All Assigned Tasks</h3>
 
-        <mat-table [dataSource]="tasks" class="custom-table mat-elevation-z2">
+        <div class="search-container">
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-label>Search Tasks</mat-label>
+                <input matInput [(ngModel)]="searchText" (input)="onSearch()" placeholder="Enter task name..." />
+            </mat-form-field>
+        </div>
+        <mat-table [dataSource]="fillteredTasks" class="custom-table mat-elevation-z2">
 
-            <!-- TaskId Column -->
-
-
-            <!-- Task Name Column -->
             <ng-container matColumnDef="taskName">
                 <mat-header-cell *matHeaderCellDef> Task </mat-header-cell>
-                <mat-cell *matCellDef="let task"> {{ task.taskName }} </mat-cell>
+                <mat-cell *matCellDef="let task" class="task-bold"> {{ task.taskName }} </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="taskDescription">
@@ -24,25 +24,27 @@
                 <mat-cell *matCellDef="let task"> {{ task.description }} </mat-cell>
             </ng-container>
 
-            <!-- AssignedTo Column -->
             <ng-container matColumnDef="assignedTo">
                 <mat-header-cell *matHeaderCellDef> Employee </mat-header-cell>
                 <mat-cell *matCellDef="let task"> {{ task.assignedTo }} </mat-cell>
             </ng-container>
 
-            <!-- Frequency Column -->
             <ng-container matColumnDef="frequencyPerMonth">
                 <mat-header-cell *matHeaderCellDef> Task Frequency </mat-header-cell>
                 <mat-cell *matCellDef="let task"> {{ task.frequencyPerMonth }} </mat-cell>
             </ng-container>
 
-            <!-- IsRecurring Column -->
+            
             <ng-container matColumnDef="isRecurring">
                 <mat-header-cell *matHeaderCellDef> Monthly Recurring </mat-header-cell>
                 <mat-cell *matCellDef="let task"> {{ task.isRecurring ? 'Yes' : 'No' }} </mat-cell>
             </ng-container>
 
-            <!-- Actions Column -->
+            <ng-container matColumnDef="taskStatus">
+                <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{ task.taskStatus }} </mat-cell>
+            </ng-container>
+
             <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
                 <mat-cell *matCellDef="let task">
@@ -54,23 +56,33 @@
             </ng-container>
 
             <ng-container matColumnDef="Completion">
-                <mat-header-cell *matHeaderCellDef> Completion </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef> Progress </mat-header-cell>
                 <mat-cell *matCellDef="let task">
-                    <button mat-raised-button color="primary" class="me-2"
-                        (click)="goForCompletion(task.taskId)">Complete</button>
+
+                    <button *ngIf="task.taskStatus === 'Completed'; else completionBtn" mat-raised-button color="accent"
+                        class="me-2" (click)="goForTaskDetails(task.taskId)">
+                        Details
+                    </button>
+
+                    <ng-template #completionBtn>
+                        <button mat-raised-button color="primary" class="me-2" (click)="goForCompletion(task.taskId)">
+                            Mark as Complete
+                        </button>
+                    </ng-template>
+
                 </mat-cell>
             </ng-container>
+
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
         </mat-table>
 
+        <ng-template #noTask>
+            <p>No tasks found.</p>
+        </ng-template>
 
-        <!-- <div *ngIf="tasks.length === 0" class="text-muted">
-            No tasks found.
-        </div> -->
-        <mat-paginator [length]="totalCount" [pageSize]="pageSize"
-            (page)="onPageChange($event)">
+        <mat-paginator [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)">
         </mat-paginator>
     </div>
 

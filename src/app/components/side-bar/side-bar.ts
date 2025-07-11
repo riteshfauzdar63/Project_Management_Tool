@@ -1,16 +1,20 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-side-bar',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './side-bar.html',
   styleUrl: './side-bar.scss'
 })
 export class SideBar {
-  opened = true;
+   isCollapsed = false;
 
-  toggleSidebar(): void {
-    this.opened = !this.opened;
-  }
+  @Output() sidebarToggle = new EventEmitter<boolean>();
+
+toggleSidebar() {
+  this.isCollapsed = !this.isCollapsed;
+  this.sidebarToggle.emit(this.isCollapsed);
+}
 }

@@ -41,26 +41,6 @@
   
 }
 
-.search-container {
-  display: flex;
-  justify-content: flex-end;
-  // margin-bottom: 10px;
-}
-
-.search-field {
-  width: 300px;
-}
-
-.btn-outline-success {
-  font-weight: 500;
-  border-width: 2px;
-  color: #198754;
-
-  &:hover {
-    background-color: #198754;
-    color: white;
-  }
-}
 .table-heading {
   font-size: 1.8rem;
   font-weight: 600;

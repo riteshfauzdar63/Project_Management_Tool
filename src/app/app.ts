@@ -11,4 +11,10 @@ import { Header } from "./components/header/header";
 })
 export class App {
   protected title = 'TaskManagementTool';
+  
+  isSidebarCollapsed = false;
+
+  onSidebarToggle(collapsed: boolean) {
+    this.isSidebarCollapsed = collapsed;
+  }
 }

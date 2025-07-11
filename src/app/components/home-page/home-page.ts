@@ -15,6 +15,9 @@ import {
 import { TaskDeleteModel } from '../task-delete-model/task-delete-model';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-home-page',
@@ -25,14 +28,18 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
     MatTableModule,
     MatIconModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
   ],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })
 export class HomePage implements OnInit {
   tasks!: Task[];
+  fillteredTasks!: Task[];
   totalCount: number = 0;
-  pageSize: number = 3;
+  pageSize: number = 10;
   pageNumber: number = 1;
   searchText: string = '';
   taskDetails!: TaskDetail;
@@ -42,6 +49,7 @@ export class HomePage implements OnInit {
     'assignedTo',
     'frequencyPerMonth',
     'isRecurring',
+    'taskStatus',
     'actions',
     'Completion',
   ];
@@ -94,6 +102,13 @@ export class HomePage implements OnInit {
     });
   }
 
+  onSearch(): void {
+  const text = this.searchText.toLowerCase();
+  this.fillteredTasks = this.tasks.filter(task =>
+    task.taskName.toLowerCase().includes(text)
+  );
+}
+
   loadTasks(): void {
     const request = {
       pageNumber: this.pageNumber,
@@ -105,6 +120,7 @@ export class HomePage implements OnInit {
       next: (res: TaskResponse) => {
         if (res.isSuccess) {
           this.tasks = res.tasks;
+          this.fillteredTasks = res.tasks;
           this.totalCount = res.totalCount;
         }
       },
@@ -132,6 +148,12 @@ export class HomePage implements OnInit {
 
   goForCompletion(taskId: number): void {
     this.router.navigate(['taskCompletionPage'], {
+      queryParams: { taskId: taskId },
+    });
+  }
+
+  goForTaskDetails(taskId: number): void {
+    this.router.navigate(['taskDetailsPage'], {
       queryParams: { taskId: taskId },
     });
   }
