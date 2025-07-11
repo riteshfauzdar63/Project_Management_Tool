@@ -2,4 +2,23 @@
     width: 725px;
     height: auto;
     overflow: hidden;
+
+    .form-check{
+        // margin-top: 2rem;
+        padding-left: 2.5rem !important;
+    }
+
+    .close-button {
+  position: absolute;
+  top: 25px;
+  right: 20px;
+  color: #666;
+  z-index: 1000;
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    color: #000;
+  }
+}
 }

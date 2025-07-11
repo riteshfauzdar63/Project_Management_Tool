@@ -1,43 +1,77 @@
-
-
 <section>
     <div class="container my-3">
         <div class="d-flex justify-content-between">
             <h4 class="text-dark">Hello User</h4>
             <button class="btn btn-outline-success rounded" (click)="openDialog()">Create Task</button>
+
+
         </div>
         <h3 class="text-primary text-center mt-5">All Assigned Tasks</h3>
 
-        <table class="table table-striped mt-3" *ngIf="taskList.length > 0">
-            <thead class="table-success">
-                <tr>
-                    <th>Id</th>
-                    <th>Task</th>
-                    <th class="text-center">Assignee</th>
-                    <th class="text-center">Task Frequency</th>
-                    <th class="text-center">Monthly Recurring</th>
-                    <th class="text-center">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let task of taskList; let i = index">
-                    <td>{{ i + 1 }}</td>
-                    <td>{{ task.taskName}}</td>
-                    <td class="text-center">{{ task.assigneeName }}</td>
-                    <td class="text-center">{{ task.repeatCount }}</td>
-                    <td class="text-center">{{ task.isRecurring? 'Yes' : 'No' }}</td>
-                    <td class="text-center">
-                        <button mat-raised-button color="primary" class="me-2">Edit</button>
-                        <button mat-raised-button color="accent" >Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <mat-table [dataSource]="tasks" class="custom-table mat-elevation-z2">
 
-        <div *ngIf="taskList.length === 0" class="text-muted">
+            <!-- TaskId Column -->
+
+
+            <!-- Task Name Column -->
+            <ng-container matColumnDef="taskName">
+                <mat-header-cell *matHeaderCellDef> Task </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{ task.taskName }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="taskDescription">
+                <mat-header-cell *matHeaderCellDef> Task Description </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{ task.description }} </mat-cell>
+            </ng-container>
+
+            <!-- AssignedTo Column -->
+            <ng-container matColumnDef="assignedTo">
+                <mat-header-cell *matHeaderCellDef> Employee </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{ task.assignedTo }} </mat-cell>
+            </ng-container>
+
+            <!-- Frequency Column -->
+            <ng-container matColumnDef="frequencyPerMonth">
+                <mat-header-cell *matHeaderCellDef> Task Frequency </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{ task.frequencyPerMonth }} </mat-cell>
+            </ng-container>
+
+            <!-- IsRecurring Column -->
+            <ng-container matColumnDef="isRecurring">
+                <mat-header-cell *matHeaderCellDef> Monthly Recurring </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{ task.isRecurring ? 'Yes' : 'No' }} </mat-cell>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                <mat-cell *matCellDef="let task">
+                    <button mat-icon-button color="primary" aria-label="Edit Task" class="me-2"
+                        (click)="openEditDialog(task.taskId)"> <mat-icon>edit</mat-icon></button>
+                    <button mat-icon-button color="warn" aria-label="Delete Task"
+                        (click)="ondeletebtn(task.taskId)"><mat-icon>delete</mat-icon></button>
+                </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Completion">
+                <mat-header-cell *matHeaderCellDef> Completion </mat-header-cell>
+                <mat-cell *matCellDef="let task">
+                    <button mat-raised-button color="primary" class="me-2"
+                        (click)="goForCompletion(task.taskId)">Complete</button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+
+        <!-- <div *ngIf="tasks.length === 0" class="text-muted">
             No tasks found.
-        </div>
-
+        </div> -->
+        <mat-paginator [length]="totalCount" [pageSize]="pageSize"
+            (page)="onPageChange($event)">
+        </mat-paginator>
     </div>
 
 </section>

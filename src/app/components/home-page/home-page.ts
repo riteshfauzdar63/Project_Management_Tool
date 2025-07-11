@@ -1,42 +1,138 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { TaskAssignPage } from '../task-assign-page/task-assign-page';
-import {  MatDialog } from '../../shared/Material'
+import { MatDialog } from '../../shared/Material';
 import { CommonModule } from '@angular/common';
-import { taskForm } from '../../model/task-model/task-model.model';
+// import { taskForm } from '../../model/task-model/task-model.model';
 import { MatButtonModule } from '@angular/material/button';
+import { taskService } from '../../services/task/task.service';
+import { Task, TaskResponse } from '../../model/task/task.model';
+import { MatTableModule } from '@angular/material/table';
+import {
+  TaskDetail,
+  TaskDetailsResponse,
+} from '../../model/task/taskDetails.model';
+import { TaskDeleteModel } from '../task-delete-model/task-delete-model';
+import { MatIconModule } from '@angular/material/icon';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-home-page',
-  imports: [RouterModule, CommonModule, MatButtonModule],
+  imports: [
+    RouterModule,
+    CommonModule,
+    MatButtonModule,
+    MatTableModule,
+    MatIconModule,
+    MatPaginatorModule,
+  ],
   templateUrl: './home-page.html',
-  styleUrl: './home-page.scss'
+  styleUrl: './home-page.scss',
 })
-export class HomePage implements OnInit{
-  constructor ( @Inject(MatDialog) private dialogRef : MatDialog){}
+export class HomePage implements OnInit {
+  tasks!: Task[];
+  totalCount: number = 0;
+  pageSize: number = 3;
+  pageNumber: number = 1;
+  searchText: string = '';
+  taskDetails!: TaskDetail[];
+  displayedColumns: string[] = [
+    'taskName',
+    'taskDescription',
+    'assignedTo',
+    'frequencyPerMonth',
+    'isRecurring',
+    'actions',
+    'Completion',
+  ];
 
-   taskList: taskForm[] = [];
+  constructor(
+    @Inject(MatDialog) private dialog: MatDialog,
+    private router: Router,
+    private taskService: taskService
+  ) {}
+  // private dialogRef :
 
   ngOnInit(): void {
-   this.getListData();
+    //  this.getListData();
+    this.loadTasks();
   }
 
-  openDialog(){
-       this.dialogRef.open(TaskAssignPage,{
-        disableClose: true,
-       });
+  openDialog() {
+    const dialogRef = this.dialog.open(TaskAssignPage, {
+      disableClose: true,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'dialog close successful') {
+        this.loadTasks();
+      }
+    });
   }
 
-  getListData():void{
-     const data = localStorage.getItem('assignedTasks');
-    this.taskList = data ? (JSON.parse(data) as taskForm[]) : [];
+  openEditDialog(taskId: number): void {
+    this.taskService.getTaskDetails(taskId).subscribe({
+      next: (getTaskResponse: TaskDetailsResponse) => {
+        if (getTaskResponse.isSuccess) {
+          // this.taskDetails = getTaskResponse.taskDetail;
+
+          const dialogRef = this.dialog.open(TaskAssignPage, {
+            disableClose: true,
+            data: {
+              isEditMode: true,
+              task: this.taskDetails,
+            },
+          });
+
+          dialogRef.afterClosed().subscribe((result) => {
+            if (result === 'dialog close successful') {
+              this.loadTasks();
+            }
+          });
+        }
+      },
+    });
   }
 
-  toRemoveData():void{
-    localStorage.removeItem('assignmentTask');
+  loadTasks(): void {
+    const request = {
+      pageNumber: this.pageNumber,
+      pageSize: this.pageSize,
+      search: this.searchText.trim(),
+    };
+
+    this.taskService.showTaskList(request).subscribe({
+      next: (res: TaskResponse) => {
+        if (res.isSuccess) {
+          this.tasks = res.tasks;
+          this.totalCount = res.totalCount;
+        }
+      },
+      error: (err) => console.error(err),
+    });
   }
-    
 
+  onPageChange(event: PageEvent): void {
+    this.pageSize = event.pageSize;
+    this.pageNumber = event.pageIndex + 1;
+    this.loadTasks();
+  }
 
+  ondeletebtn(taskId: number): void {
+    const dialogRef = this.dialog.open(TaskDeleteModel, {
+      data: { taskId }, // pass taskId to dialog
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadTasks();
+      }
+    });
+  }
+
+  goForCompletion(taskId: number): void {
+    this.router.navigate(['taskCompletionPage'], {
+      queryParams: { taskId: taskId },
+    });
+  }
 }
-

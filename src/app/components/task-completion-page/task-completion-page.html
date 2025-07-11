@@ -1,0 +1,34 @@
+<form [formGroup]="completionForm" (ngSubmit)="onSubmit()" class="completion-form">
+  <mat-card>
+    <mat-card-title class="form-title">Task Completion</mat-card-title>
+    <mat-card-content>
+      <div class="form-grid">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Task ID</mat-label>
+          <input matInput formControlName="taskId" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Task Name</mat-label>
+          <input matInput formControlName="taskName" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Assigned To</mat-label>
+          <input matInput formControlName="assignedToName" readonly />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Feedback</mat-label>
+          <textarea matInput formControlName="feedback" rows="4" placeholder="Enter your remarks..." required></textarea>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end" class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="completionForm.invalid">
+        Complete Task
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

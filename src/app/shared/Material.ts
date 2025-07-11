@@ -6,16 +6,17 @@ import { MatSidenavModule } from "@angular/material/sidenav";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatListModule } from "@angular/material/list";
+import { MatPaginatorModule } from "@angular/material/paginator";
 
 export const MaterialModules = [
     MatButtonModule,
-    MatTableModule,
     MatCardModule,
     MatDialogModule,
     MatSidenavModule,
     MatToolbarModule,
     MatIconModule,
     MatListModule,
+    MatPaginatorModule,
 ]
 
-export { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatButton, MatSidenavModule, MatToolbarModule, MatListModule, MatIconModule, };
+export { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatButton, MatSidenavModule, MatToolbarModule, MatListModule, MatIconModule, MatPaginatorModule };

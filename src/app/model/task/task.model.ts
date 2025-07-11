@@ -1,5 +1,5 @@
 export interface Task {
-   taskId: number | null,
+  taskId: number,
   taskName: string,
   description: string,
   isRecurring: boolean,
@@ -7,6 +7,13 @@ export interface Task {
   createdBy: number,
   createdDate: string,
   assignmentId: number | null,
-  assignedTo: number,
+  assignedTo: string,
   startDate: string,
+}
+
+export interface TaskResponse {
+    tasks : Task[],
+    totalCount: number,
+    isSuccess: boolean,
+     error : string[],  
 }

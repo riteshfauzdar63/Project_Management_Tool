@@ -9,13 +9,13 @@ app-side-bar {
   position: fixed;
   top: 63px;
   left: 0;
-  width: 275px; /* fixed width for sidebar */
+  width: 235px; /* fixed width for sidebar */
   height: calc(100vh - 63px);
   z-index: 100;
 }
 
 .router-container {
-  margin-left: 275px; /* same as sidebar width */
+  margin-left: 235px; /* same as sidebar width */
   padding: 0px 10px;
 overflow-x: hidden;
   padding-top: 70px; /* to clear header */
