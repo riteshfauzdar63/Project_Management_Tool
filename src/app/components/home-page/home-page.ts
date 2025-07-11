@@ -35,7 +35,7 @@ export class HomePage implements OnInit {
   pageSize: number = 3;
   pageNumber: number = 1;
   searchText: string = '';
-  taskDetails!: TaskDetail[];
+  taskDetails!: TaskDetail;
   displayedColumns: string[] = [
     'taskName',
     'taskDescription',
@@ -74,7 +74,7 @@ export class HomePage implements OnInit {
     this.taskService.getTaskDetails(taskId).subscribe({
       next: (getTaskResponse: TaskDetailsResponse) => {
         if (getTaskResponse.isSuccess) {
-          // this.taskDetails = getTaskResponse.taskDetail;
+          this.taskDetails = getTaskResponse.taskDetail;
 
           const dialogRef = this.dialog.open(TaskAssignPage, {
             disableClose: true,
