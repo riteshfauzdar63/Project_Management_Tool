@@ -10,6 +10,9 @@
             <mat-form-field appearance="outline" class="search-field">
                 <mat-label>Search Tasks</mat-label>
                 <input matInput [(ngModel)]="searchText" (input)="onSearch()" placeholder="Enter task name..." />
+                <button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+                    <mat-icon>close</mat-icon>
+                </button>
             </mat-form-field>
         </div>
         <mat-table [dataSource]="fillteredTasks" class="custom-table mat-elevation-z2">
@@ -34,7 +37,7 @@
                 <mat-cell *matCellDef="let task"> {{ task.frequencyPerMonth }} </mat-cell>
             </ng-container>
 
-            
+
             <ng-container matColumnDef="isRecurring">
                 <mat-header-cell *matHeaderCellDef> Monthly Recurring </mat-header-cell>
                 <mat-cell *matCellDef="let task"> {{ task.isRecurring ? 'Yes' : 'No' }} </mat-cell>

@@ -109,6 +109,11 @@ export class HomePage implements OnInit {
   );
 }
 
+clearSearch(): void {
+  this.searchText = '';
+  this.onSearch();
+}
+
   loadTasks(): void {
     const request = {
       pageNumber: this.pageNumber,

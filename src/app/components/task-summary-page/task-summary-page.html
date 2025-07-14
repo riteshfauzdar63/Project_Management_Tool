@@ -32,7 +32,10 @@
                 <mat-cell *matCellDef="let task"> {{ task.expectedCount }} </mat-cell>
             </ng-container>
 
-            
+            <ng-container matColumnDef="taskMonth">
+                <mat-header-cell *matHeaderCellDef> Assign Month</mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{ task.monthYear | date: 'MMMM yyyy'}} </mat-cell>
+            </ng-container>
 
             <ng-container matColumnDef="taskStatus">
                 <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>

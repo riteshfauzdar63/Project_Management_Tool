@@ -3,10 +3,11 @@ import { taskSummary, taskSummaryResponse } from '../../model/task-summary/task-
 import { taskService } from '../../services/task/task.service';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-task-summary-page',
-  imports: [MatTableModule,MatPaginatorModule],
+  imports: [MatTableModule,MatPaginatorModule,DatePipe],
   templateUrl: './task-summary-page.html',
   styleUrl: './task-summary-page.scss'
 })
@@ -23,6 +24,7 @@ export class TaskSummaryPage implements OnInit{
     'assignedTo',
     'actualCount',
     'expectedCount',
+    'taskMonth',
     'taskStatus',
   ];
 
