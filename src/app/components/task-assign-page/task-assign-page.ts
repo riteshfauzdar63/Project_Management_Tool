@@ -109,7 +109,6 @@ export class TaskAssignPage implements OnInit {
   }
 
   onSubmit(): void {
-    debugger;
     if (this.taskForm.valid) {
       this.taskForm.patchValue({
         createdBy: 1,

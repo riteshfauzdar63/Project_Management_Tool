@@ -107,6 +107,7 @@ export class HomePage implements OnInit {
   this.fillteredTasks = this.tasks.filter(task =>
     task.taskName.toLowerCase().includes(text)
   );
+  this.totalCount = this.fillteredTasks.length;
 }
 
 clearSearch(): void {

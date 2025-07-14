@@ -1,6 +1,25 @@
  <h3 class="table-heading text-primary text-center mt-3">Tasks Summary</h3>
 
-<mat-table [dataSource]="TaskSummary" class="custom-table mat-elevation-z2">
+ <div class="search-container">
+       <mat-form-field appearance="outline" class="employee-select full-width">
+                    <mat-label>Select an option</mat-label>
+                    <mat-select (selectionChange)="selectedValue($event)" [(value)]="selectedEmployee">
+                        <mat-option value="">All</mat-option>
+                        <mat-option  *ngFor="let empName of assigneeOptions" [value]="empName.fullName">{{empName.fullName}}</mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                    
+
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-label class="search-label">Search Employee</mat-label>
+                <input matInput [(ngModel)]="searchText" (input)="onSearch()" placeholder="Enter Employee name..." />
+                <button *ngIf="searchText" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearch()">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+
+<mat-table [dataSource]="fillteredTasks" class="custom-table mat-elevation-z2">
 
              <ng-container matColumnDef="taskId">
                 <mat-header-cell *matHeaderCellDef> TaskId </mat-header-cell>

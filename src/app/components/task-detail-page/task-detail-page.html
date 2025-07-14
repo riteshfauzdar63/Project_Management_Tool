@@ -14,31 +14,31 @@
 
     <div class="card-body">
       <div class="mb-3">
-        <strong>Task ID:</strong> {{ task.taskId }}
+        <strong class="me-2">Task ID:</strong> {{ task.taskId }}
       </div>
       <div class="mb-3">
-        <strong>Task Name:</strong> {{ task.taskName }}
-      </div>
-
-      <div class="mb-3">
-        <strong>Created By:</strong> {{ task.createdByName }}
+        <strong class="me-2">Task Name:</strong> {{ task.taskName }}
       </div>
 
       <div class="mb-3">
-        <strong>Task Description:</strong> {{ task.description }}
+        <strong class="me-2">Assigned By:</strong> {{ task.createdByName }}
+      </div>
+
+      <div class="mb-3">
+        <strong class="me-2">Task Description:</strong> {{ task.description }}
       </div>
       
 
       <div class="mb-3">
-        <strong>Assigned To:</strong> {{ task.assignedToEmployeeName }}
+        <strong class="me-2">Assigned To:</strong> {{ task.assignedToEmployeeName }}
       </div>
 
       <div *ngIf="task.isRecurring" class="mb-3">
-        <strong>Recurring:</strong> Yes ({{ task.frequencyPerMonth }} times/month)
+        <strong class="me-2">Recurring:</strong> True ({{ task.frequencyPerMonth }} times/month)
       </div>
 
       <div class="mb-3">
-        <strong> Remarks:</strong>
+        <strong class="me-2"> Remarks:</strong>
         {{ task.remarks }}
       </div>
     </div>

@@ -24,6 +24,7 @@
     transition: all 0.3s ease;
   }
 
+
    .mat-mdc-raised-button:not(:disabled) {
     transition: background-color 0.2s ease;
     padding: 25px 28px ;
@@ -37,9 +38,14 @@
     font-weight: 500;
     color: #212529;
   }
-
   
 }
+
+// .mat-mdc-paginator-container{
+// .mat-mdc-paginator-page-size{
+//    display: none !important;
+//   }
+// }
 
 .search-container {
   display: flex;
@@ -94,4 +100,9 @@
   to {
     width: 60px;
   }
+}
+
+
+::ng-deep .mat-mdc-paginator-page-size{
+    display: none !important;
 }

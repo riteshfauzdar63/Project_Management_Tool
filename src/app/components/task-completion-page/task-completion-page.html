@@ -1,7 +1,7 @@
 <form [formGroup]="completionForm" (ngSubmit)="onSubmit()" class="completion-form">
   <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-  <h5 class="mb-0">Task Completion</h5>
+  <h5 class="mb-0">Task Completion Form</h5>
   <div class="d-flex align-items-center">
     <span class="status-circle me-2"
           [ngClass]="{
@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="card-footer text-end">
+    <div class="card-footer text-center border-0 bg-white">
       <button type="submit" class="btn btn-primary" [disabled]="completionForm.invalid">
         Complete Task
       </button>
