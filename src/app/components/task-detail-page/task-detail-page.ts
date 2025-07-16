@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { taskService } from '../../services/task/task.service';
 import { TaskDetail, TaskDetailsResponse } from '../../model/task/taskDetails.model';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,8 @@ export class TaskDetailPage implements OnInit{
     task!: TaskDetail;
    constructor(
     private activateRouter: ActivatedRoute,
-    private taskService: taskService
+    private taskService: taskService,
+    private route : Router,
   ){}
 
   ngOnInit(): void {
@@ -36,4 +37,8 @@ export class TaskDetailPage implements OnInit{
         }
       });
     }
+
+    gotoHome(): void{
+ this.route.navigate(['/taskAssignPage']);
+}
 }

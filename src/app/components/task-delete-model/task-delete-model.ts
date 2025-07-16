@@ -34,12 +34,3 @@ export class TaskDeleteModel {
     this.dialogRef.close(false);
   }
 } 
-//  this.taskService.deleteTask(taskId).subscribe({
-//     next :() =>{
-//       alert('Selected Task is deleted successfully');
-//       this.getListData();
-//     },
-//     error : (err) =>{
-//       console.log(err);
-//     }
-//    })

@@ -19,7 +19,7 @@
             </mat-form-field>
         </div>
 
-<mat-table [dataSource]="fillteredTasks" class="custom-table mat-elevation-z2">
+ <mat-table [dataSource]="fillteredTasks" class="custom-table mat-elevation-z2">
 
              <ng-container matColumnDef="taskId">
                 <mat-header-cell *matHeaderCellDef> TaskId </mat-header-cell>
@@ -72,4 +72,31 @@
         </ng-template>
 
         <mat-paginator [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)">
-        </mat-paginator>
+        </mat-paginator> 
+
+   <!-- <div class="task-card-container" >
+  <div class="task-card" [class.collapsed]="!task.expanded" *ngFor="let task of fillteredTasks">
+    <div class="task-header">
+      <div class="task-id">#{{ task.taskId }}</div>
+      <div class="status" [ngClass]="getStatusClass(task.status)">
+        {{ task.status }}
+      </div>
+    </div>
+
+    <h5 class="task-title">{{ task.taskName }}</h5>
+
+    <button class="toggle-btn" (click)="task.expanded = !task.expanded">
+      {{ task.expanded ? 'Hide Details' : 'Show Details' }}
+    </button>
+
+    <div class="collapsible-content" *ngIf="task.expanded">
+      <p class="task-desc">{{ task.description }}</p>
+
+      <div class="task-details">
+        <p><strong>Employee:</strong> {{ task.assignedEmployee }}</p>
+        <p><strong>Assign Month:</strong> {{ task.monthYear | date: 'MMMM yyyy' }}</p>
+        <p><strong>Progress:</strong> {{ task.actualCount }}/{{ task.expectedCount }}</p>
+      </div>
+    </div>
+  </div>
+</div> -->

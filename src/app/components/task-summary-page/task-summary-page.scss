@@ -111,3 +111,117 @@
 ::ng-deep .mat-mdc-paginator-page-size{
     display: none !important;
 }
+.task-card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.task-card {
+  background: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 16px;
+  width: 320px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+
+  &.collapsed {
+    .collapsible-content {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+  }
+
+  .task-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .task-id {
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .status {
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+
+    &.completed {
+      background-color: #d1e7dd;
+      color: #0f5132;
+    }
+
+    &.pending {
+      background-color: #fff3cd;
+      color: #664d03;
+    }
+
+    &.overdue {
+      background-color: #f8d7da;
+      color: #842029;
+    }
+
+    &.in-progress {
+      background-color: #cfe2ff;
+      color: #084298;
+    }
+  }
+
+  .task-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0d6efd;
+    margin-bottom: 0.25rem;
+  }
+
+  .toggle-btn {
+    background: none;
+    border: none;
+    color: #0d6efd;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0.5rem 0 0.75rem;
+    padding: 0;
+    text-align: left;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .collapsible-content {
+    max-height: 500px;
+    overflow: hidden;
+    opacity: 1;
+    transition: all 0.3s ease;
+
+    .task-desc {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 0.75rem;
+    }
+
+    .task-details {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+
+      p {
+        font-size: 13.5px;
+        margin: 0;
+        color: #343a40;
+      }
+    }
+  }
+}

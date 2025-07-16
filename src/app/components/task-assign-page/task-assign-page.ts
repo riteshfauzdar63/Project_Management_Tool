@@ -104,7 +104,6 @@ export class TaskAssignPage implements OnInit {
   }
 
   onCloseClick(): void {
-    // You can pass data back to the component that opened the dialog
     this.dialogRef.close('dialog close successful');
   }
 
@@ -139,12 +138,13 @@ export class TaskAssignPage implements OnInit {
       this.taskService.createTask(formData).subscribe({
         next: (res) => {
           console.log('task submitted', res);
+          this.onCloseClick();
         },
         error: (error) => {
           console.error(' Error submitting task', error);
         },
       });
-      this.onCloseClick();
+      
     } else {
       this.taskForm.markAllAsTouched();
     }

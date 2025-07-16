@@ -82,10 +82,13 @@ export class TaskCompletionPage implements OnInit {
     });
   }
 
+gotoHome(): void{
+ this.route.navigate(['/taskAssignPage']);
+}
+
   
 
   onSubmit(): void {
-    debugger;
     if (this.completionForm.valid) {
       const formValue = this.completionForm.getRawValue();
 

@@ -59,10 +59,9 @@ export class HomePage implements OnInit {
     private router: Router,
     private taskService: taskService
   ) {}
-  // private dialogRef :
+
 
   ngOnInit(): void {
-    //  this.getListData();
     this.loadTasks();
   }
 
@@ -147,6 +146,7 @@ clearSearch(): void {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        
         this.loadTasks();
       }
     });
